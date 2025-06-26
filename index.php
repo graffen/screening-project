@@ -1,3 +1,8 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['user']);
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -13,16 +18,19 @@
             <div class="logo">
                 <img src="images/logo.png" alt="Логотип поликлиники">
             </div>
-            <nav class="top-menu">
-                <ul>
-                    <li><a href="/index.html" class="active">Главная</a></li>
-                    <li><a href="/diseases/index.php">Заболевания</a></li>
-                    <li><a href="/recomendations/index.php">Рекомендации</a></li>
-                </ul>
-                 <div class="auth-link">
-                    <a href="/login.php" class="btn-secondary small">Войти</a>
-                </div>
-            </nav>
+                <nav class="top-menu">
+                    <ul>
+                        <li><a href="/index.php">Главная</a></li>
+                        <li><a href="/diseases/index.php">Заболевания</a></li>
+                        <li><a href="/recomendations/index.php">Рекомендации</a></li>    
+                        <?php if ($isLoggedIn): ?>
+                        <li><a href="/dashboard.php">Кабинет</a></li>
+                        <li><a href="/logout.php">Выйти</a></li>
+                        <?php else: ?>
+                        <li><a href="/login.php">Войти</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
         </div>
     </header>
 

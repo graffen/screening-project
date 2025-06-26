@@ -1,12 +1,20 @@
 <?php
-require_once 'inc/users.php';
+require_once 'inc/db.php';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Просто имитируем регистрацию
+  $email = $_POST['email'] ?? '';
+  $password = $_POST['password'] ?? '';
+
+  $stmt = $pdo->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
+  $stmt->execute([$email, $password]);
+
+  $userId = $pdo->lastInsertId();
   $_SESSION['user'] = [
-    'email' => $_POST['email'],
-    'role' => 'user'
+    'id' => $userId,
+    'email' => $email
   ];
+
   header('Location: dashboard.php');
   exit;
 }

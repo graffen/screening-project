@@ -1,25 +1,29 @@
 <?php
-require_once 'inc/users.php';
+require_once 'inc/db.php';
+session_start();
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = $_POST['email'] ?? '';
   $password = $_POST['password'] ?? '';
 
-  foreach ($users as $user) {
-    if ($user['email'] === $email && $user['password'] === $password) {
-      $_SESSION['user'] = [
-        'email' => $email,
-        'role' => $user['role']
-      ];
-      header('Location: dashboard.php');
-      exit;
-    }
-  }
+  $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+  $stmt->execute([$email]);
+  $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  $error = 'Неверный логин или пароль';
+  if ($user && $user['password'] === $password) {
+    $_SESSION['user'] = [
+      'id' => $user['id'],
+      'email' => $user['email']
+    ];
+    header('Location: dashboard.php');
+    exit;
+  } else {
+    $error = 'Неверный логин или пароль';
+  }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ru">

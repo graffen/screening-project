@@ -49,13 +49,16 @@ function updateProgress(questionIndex) {
 function showResults() {
     const quizContainer = document.getElementById('quizContainer');
     const resultContainer = document.getElementById('resultContainer');
-    
+
     quizContainer.classList.add('hidden');
     resultContainer.classList.remove('hidden');
-    
+
     let resultText = '';
+    let resultTitle = '';
+
     for (const result of results) {
         if (userScore >= result.minScore) {
+            resultTitle = result.title; // ← вот он!
             resultText = `
                 <h3>${result.title}</h3>
                 <p>${result.description}</p>
@@ -66,8 +69,23 @@ function showResults() {
             break;
         }
     }
-    
+
     document.getElementById('resultContent').innerHTML = resultText;
+
+    //  Отправка результата на сервер
+    fetch('/screening_test/save_result.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            answers: [`Сумма баллов: ${userScore}`], 
+            result: resultTitle
+        })
+    })
+    .then(res => res.text())
+    .then(msg => console.log('Результат сохранён:', msg))
+    .catch(err => console.error('Ошибка сохранения:', err));
 }
 
 // Инициализация после загрузки страницы
