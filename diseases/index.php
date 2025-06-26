@@ -1,45 +1,29 @@
+<?php require_once '../inc/articles.php'; ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Заболевания</title>
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
   <h1>Заболевания</h1>
-
-  <input type="text" id="search" placeholder="Введите симптом..." />
-  <div id="articles-list"></div>
-
-  <script src="../js/articles.js"></script>
-  <script>
-    const listEl = document.getElementById('articles-list');
-    const searchEl = document.getElementById('search');
-
-    function render(articlesToRender) {
-      listEl.innerHTML = '';
-      articlesToRender.forEach(article => {
-        const block = document.createElement('div');
-        block.className = 'article-card';
-        block.innerHTML = `
-          <h2>${article.title}</h2>
-          <p><strong>Симптомы:</strong> ${article.symptoms}</p>
-          <a href="article.html?id=${article.id}">Читать далее</a>
-        `;
-        listEl.appendChild(block);
-      });
+  <form method="GET">
+    <input type="text" name="search" placeholder="Поиск..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+  </form>
+  <div>
+    <?php
+    $search = $_GET['search'] ?? '';
+    foreach ($articles as $article) {
+      if (!$search || stripos($article['title'], $search) !== false || stripos($article['symptoms'], $search) !== false) {
+        echo "<div class='article-card'>";
+        echo "<h2>{$article['title']}</h2>";
+        echo "<p><strong>Симптомы:</strong> {$article['symptoms']}</p>";
+        echo "<a href='article.php?id={$article['id']}'>Читать далее</a>";
+        echo "</div>";
+      }
     }
-
-    render(articles);
-
-    searchEl.addEventListener('input', () => {
-      const value = searchEl.value.toLowerCase();
-      const filtered = articles.filter(a =>
-        a.title.toLowerCase().includes(value) ||
-        a.symptoms.toLowerCase().includes(value)
-      );
-      render(filtered);
-    });
-  </script>
+    ?>
+  </div>
 </body>
 </html>

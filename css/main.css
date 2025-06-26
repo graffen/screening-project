@@ -229,3 +229,184 @@ header {
 .hidden {
     display: none;
 }
+
+/* === СТИЛИ ДЛЯ РАЗДЕЛА "ЗАБОЛЕВАНИЯ" === */
+.article-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.article-card:hover {
+  transform: scale(1.02);
+}
+
+.article-card h2 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.article-card p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.article-card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.article-card a:hover {
+  text-decoration: underline;
+}
+
+#article-container {
+  max-width: 700px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+/* === СТИЛИ ДЛЯ РАЗДЕЛА "РЕКОМЕНДАЦИИ" === */
+.publication-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.publication-card {
+  background: #fdfdfd;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+}
+
+.publication-card:hover {
+  background: #f0f8ff;
+  transform: scale(1.01);
+}
+
+.publication-card h2 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  color: #222;
+}
+
+.publication-card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.publication-card a {
+  margin-top: 10px;
+  display: inline-block;
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.publication-card a:hover {
+  text-decoration: underline;
+}
+
+#publication-container {
+  max-width: 750px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* === СТИЛИ ДЛЯ АВТОРИЗАЦИИ === */
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.auth-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.auth-container button {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #0066cc;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.auth-container button:hover {
+  background: #004a99;
+}
+
+.auth-container p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.auth-container a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.auth-error {
+  background: #ffe0e0;
+  color: #900;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* === Кнопка "Войти" в шапке === */
+.auth-link {
+  margin-left: auto;
+}
+
+.auth-link a.btn-secondary.small {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 1px solid #0066cc;
+  color: #0066cc;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.auth-link a.btn-secondary.small:hover {
+  background: #e6f0ff;
+}
